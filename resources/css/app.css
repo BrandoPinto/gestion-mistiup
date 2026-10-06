@@ -1,0 +1,153 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+@source '../../storage/framework/views/*.php';
+
+/*
+ * Design System — tokens derivados del logo.
+ * Azul noche #101727 (institucional) · Azul eléctrico #2664EB (acción) · Crema #F8F1E7 (acento editorial).
+ * Se eliminan las paletas por defecto de Tailwind a propósito: solo existen estos colores.
+ */
+@theme {
+    --color-*: initial;
+    --color-white: #ffffff;
+    --color-transparent: transparent;
+    --color-current: currentColor;
+
+    --color-navy-950: #0b101c;
+    --color-navy-900: #101727;
+    --color-navy-800: #18213a;
+    --color-navy-700: #222d4d;
+    --color-navy-600: #3a4666;
+    --color-navy-400: #8890a8;
+
+    --color-brand-50: #eef3fe;
+    --color-brand-100: #dce6fc;
+    --color-brand-200: #b9cdf9;
+    --color-brand-500: #4a80f0;
+    --color-brand-600: #2664eb;
+    --color-brand-700: #1d50c4;
+    --color-brand-800: #1a429c;
+
+    --color-cream-50: #fcf9f4;
+    --color-cream-100: #f8f1e7;
+    --color-cream-200: #efe4d2;
+    --color-cream-300: #e2d2b8;
+
+    --color-ink-900: #101727;
+    --color-ink-700: #2e3650;
+    --color-ink-500: #5b6278;
+    --color-ink-400: #8a90a2;
+    --color-ink-300: #b5b9c5;
+
+    --color-line: #e6e1d8;
+    --color-line-strong: #d6cfc2;
+    --color-surface: #ffffff;
+    --color-canvas: #fcf9f4;
+
+    /* Semánticos: solo para estados (pagado, pendiente, vencido). */
+    --color-success-50: #ecf7ef;
+    --color-success-600: #15803d;
+    --color-success-700: #116632;
+    --color-warning-50: #fdf4e6;
+    --color-warning-600: #b45309;
+    --color-warning-700: #92400e;
+    --color-danger-50: #fcefef;
+    --color-danger-600: #b91c1c;
+    --color-danger-700: #961616;
+
+    --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+    /* Escala tipográfica: 11 / 12 / 13 / 14 (base) / 16 / 20 / 24 / 30 */
+    --text-*: initial;
+    --text-2xs: 0.6875rem;
+    --text-2xs--line-height: 1rem;
+    --text-xs: 0.75rem;
+    --text-xs--line-height: 1rem;
+    --text-sm: 0.8125rem;
+    --text-sm--line-height: 1.25rem;
+    --text-base: 0.875rem;
+    --text-base--line-height: 1.375rem;
+    --text-md: 1rem;
+    --text-md--line-height: 1.5rem;
+    --text-lg: 1.25rem;
+    --text-lg--line-height: 1.75rem;
+    --text-xl: 1.5rem;
+    --text-xl--line-height: 2rem;
+    --text-2xl: 1.875rem;
+    --text-2xl--line-height: 2.25rem;
+
+    --radius-*: initial;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-full: 9999px;
+
+    /* Solo las capas flotantes llevan sombra. */
+    --shadow-*: initial;
+    --shadow-overlay: 0 8px 24px -6px rgb(16 23 39 / 0.18), 0 2px 6px -2px rgb(16 23 39 / 0.08);
+    --shadow-subtle: 0 1px 2px 0 rgb(16 23 39 / 0.05);
+
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+
+    --animate-fade-in: fade-in 150ms ease-out;
+    --animate-pop-in: pop-in 160ms cubic-bezier(0.2, 0, 0, 1);
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes pop-in {
+        from {
+            opacity: 0;
+            transform: translateY(4px) scale(0.98);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+}
+
+@layer base {
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        @apply bg-canvas text-base text-ink-900 antialiased;
+        font-feature-settings: 'cv05', 'cv08';
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-brand-600;
+    }
+
+    ::selection {
+        @apply bg-brand-100 text-ink-900;
+    }
+}
+
+@utility eyebrow {
+    @apply text-2xs font-semibold tracking-[0.08em] text-ink-500 uppercase;
+}
+
+@utility numeric {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum', 'zero';
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

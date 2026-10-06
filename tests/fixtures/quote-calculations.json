@@ -1,0 +1,92 @@
+[
+    {
+        "name": "ejemplo del requerimiento: desarrollo, hosting y dominio",
+        "tax_rate": "18.00",
+        "items": [
+            { "quantity": "1", "unit_price": "2500.00", "discount_type": null, "discount_value": null },
+            { "quantity": "1", "unit_price": "350.00", "discount_type": null, "discount_value": null },
+            { "quantity": "1", "unit_price": "80.00", "discount_type": null, "discount_value": null }
+        ],
+        "global_discount_type": null,
+        "global_discount_value": null,
+        "expected": {
+            "lines": [
+                { "gross": "2500.00", "discount": "0.00", "total": "2500.00" },
+                { "gross": "350.00", "discount": "0.00", "total": "350.00" },
+                { "gross": "80.00", "discount": "0.00", "total": "80.00" }
+            ],
+            "subtotal": "2930.00",
+            "global_discount": "0.00",
+            "discount_total": "0.00",
+            "total": "2930.00",
+            "tax_base": "2483.05",
+            "tax_amount": "446.95"
+        }
+    },
+    {
+        "name": "cantidades decimales, descuentos por línea y global en porcentaje",
+        "tax_rate": "18.00",
+        "items": [
+            { "quantity": "1.5", "unit_price": "120.33", "discount_type": "percent", "discount_value": "10" },
+            { "quantity": "3", "unit_price": "99.99", "discount_type": "amount", "discount_value": "20" }
+        ],
+        "global_discount_type": "percent",
+        "global_discount_value": "5",
+        "expected": {
+            "lines": [
+                { "gross": "180.50", "discount": "18.05", "total": "162.45" },
+                { "gross": "299.97", "discount": "20.00", "total": "279.97" }
+            ],
+            "subtotal": "442.42",
+            "global_discount": "22.12",
+            "discount_total": "60.17",
+            "total": "420.30",
+            "tax_base": "356.19",
+            "tax_amount": "64.11"
+        }
+    },
+    {
+        "name": "descuento global por monto e IGV 0%",
+        "tax_rate": "0.00",
+        "items": [
+            { "quantity": "2", "unit_price": "0.05", "discount_type": null, "discount_value": null },
+            { "quantity": "1", "unit_price": "1000.00", "discount_type": "percent", "discount_value": "12.5" }
+        ],
+        "global_discount_type": "amount",
+        "global_discount_value": "75.10",
+        "expected": {
+            "lines": [
+                { "gross": "0.10", "discount": "0.00", "total": "0.10" },
+                { "gross": "1000.00", "discount": "125.00", "total": "875.00" }
+            ],
+            "subtotal": "875.10",
+            "global_discount": "75.10",
+            "discount_total": "200.10",
+            "total": "800.00",
+            "tax_base": "800.00",
+            "tax_amount": "0.00"
+        }
+    },
+    {
+        "name": "redondeo HALF_UP en céntimos",
+        "tax_rate": "18.00",
+        "items": [
+            { "quantity": "1", "unit_price": "0.10", "discount_type": "percent", "discount_value": "50" },
+            { "quantity": "1", "unit_price": "0.03", "discount_type": "percent", "discount_value": "50" }
+        ],
+        "global_discount_type": null,
+        "global_discount_value": null,
+        "expected": {
+            "lines": [
+                { "gross": "0.10", "discount": "0.05", "total": "0.05" },
+                { "gross": "0.03", "discount": "0.02", "total": "0.01" }
+            ],
+            "subtotal": "0.06",
+            "global_discount": "0.00",
+            "discount_total": "0.07",
+            "total": "0.06",
+            "tax_base": "0.05",
+            "tax_amount": "0.01"
+        }
+    }
+]

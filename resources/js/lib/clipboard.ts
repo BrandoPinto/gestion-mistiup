@@ -1,0 +1,28 @@
+/**
+ * Copia texto al portapapeles. La API moderna requiere HTTPS (o localhost); si no está disponible
+ * se usa el método clásico con un textarea temporal.
+ */
+export async function copyText(text: string): Promise<boolean> {
+    try {
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            return true;
+        }
+    } catch {
+        // Continúa con el método alternativo.
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+        return document.execCommand('copy');
+    } finally {
+        document.body.removeChild(textarea);
+    }
+}
